@@ -2,10 +2,18 @@
 
 A utility for converting web pages into ePub formatted eBooks.
 
+## Installation
+
+On MacOS html2epub can be install via homebrew with the following command:
+
+```
+brew install jwhitehorn/brew/html2epub
+```
+
 ## Usage
 
 ```
-ruby main.rb --url https://www.datasyncbook.com \
+html2epub --url https://www.datasyncbook.com \
     --toc ./example/toc.xhtml \
     --cover ./example/cover.png \
     --contents ./example/contents.json \
