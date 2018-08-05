@@ -4,7 +4,7 @@ A utility for converting web pages into ePub formatted eBooks.
 
 ## Installation
 
-On macOS html2epub can be install via homebrew with the following command:
+On macOS html2epub can be installed via homebrew with the following command:
 
 ```
 brew install jwhitehorn/brew/html2epub
