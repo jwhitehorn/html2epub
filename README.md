@@ -5,12 +5,12 @@ A utility for converting web pages into ePub formatted eBooks.
 ## Usage
 
 ```
-ruby main.rb --url https://www.datasyncbook.com \\
-    --toc ./example/toc.xhtml \\
-    --cover ./example/cover.png \\
-    --contents ./example/content.json \\
-    --title "Data Synchronization" \\
-    --subtitle "Patterns, Tools, & Techniques" \\
+ruby main.rb --url https://www.datasyncbook.com \
+    --toc ./example/toc.xhtml \
+    --cover ./example/cover.png \
+    --contents ./example/contents.json \
+    --title "Data Synchronization" \
+    --subtitle "Patterns, Tools, & Techniques" \
     --author "Jason Whitehorn"
 ```
 
