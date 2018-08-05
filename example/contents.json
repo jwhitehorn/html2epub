@@ -1,0 +1,17 @@
+[
+  {
+    "url": "https://www.datasyncbook.com/content/introduction/",
+    "file": "html/intro.xhtml",
+    "login": null
+  },
+  {
+    "url": "https://www.datasyncbook.com/content/server-to-client-updates/",
+    "file": "html/part1.xhtml",
+    "login": null
+  },
+  {
+    "url": "https://www.datasyncbook.com/content/whole-database-synchronization/",
+    "file": "html/chapter1.xhtml",
+    "login": null
+  }
+]
