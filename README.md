@@ -12,6 +12,12 @@ brew install jwhitehorn/brew/html2epub
 
 ## Usage
 
+A more in-depth overview of how to use html2epub can be found here:
+
+- [Generating ePub Books From HTML](https://jason.whitehorn.us/blog/2018/08/05/generating-epub-books-from-html/)
+
+For the quick-start version, simply invoke the command with references to the table of contents, cover image, and contents.json (see the example directory for examples of those files):
+
 ```
 html2epub --url https://www.datasyncbook.com \
     --toc ./example/toc.xhtml \
