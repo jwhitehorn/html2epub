@@ -9,6 +9,20 @@ require 'tempfile'
 require 'json'
 require 'args_parser'
 
+VERSION = "0.1"
+LICENSE = <<EOL
+Copyright (c) 2018, Jason Whitehorn
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+EOL
+
 
 def process_chapter book, all_contents, url, filename, login
   contents = nil
@@ -103,6 +117,8 @@ args = ArgsParser.parse ARGV do
   arg :cover, 'Cover Image'
   arg :verbose, 'verbose mode'
   arg :help, 'show help', :alias => :h
+  arg :version, 'Display html2epub version', :alias => :v
+  arg :copyright, 'Display html2epub copyright information', :alias => :c
   arg :lang, 'Language', :default => 'en'
   arg :title, 'Title', :alias => :t
   arg :subtitle, 'Sub Title'
@@ -112,6 +128,17 @@ end
 
 if args.has_option? :help
   STDERR.puts args.help
+  exit 1
+end
+
+if args.has_option? :version
+  puts "html2epub #{VERSION}"
+  exit 1
+end
+
+if args.has_option? :copyright
+  puts "html2epub #{VERSION}"
+  puts LICENSE
   exit 1
 end
 
