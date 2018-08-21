@@ -151,5 +151,5 @@ book.ordered {
 book.add_item('html/cover.png', args[:cover]).cover_image
 
 
-epubname = File.join(File.dirname(__FILE__), args[:output])
+epubname = File.join(Dir.pwd, args[:output])
 book.generate_epub(epubname)
