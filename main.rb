@@ -124,6 +124,7 @@ args = ArgsParser.parse ARGV do
   arg :subtitle, 'Sub Title'
   arg :author, 'Author', :alias => :a
   arg :contents, 'Contents File', :default => 'contents.json'
+  arg :stylesheet, "Optional stylesheet"
 end
 
 if args.has_option? :help
@@ -176,6 +177,12 @@ book.ordered {
   book.add_item('html/toc.xhtml', args[:toc]).add_property('nav')
 }
 book.add_item('html/cover.png', args[:cover]).cover_image
+
+stylesheet_path = "empty.css"
+if args.has_param? :stylesheet
+  stylesheet_path = File.join(Dir.pwd, args[:stylesheet])
+end
+book.add_item('html/style.css', stylesheet_path)
 
 
 epubname = File.join(Dir.pwd, args[:output])
