@@ -24,7 +24,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 EOL
 
 
-def process_chapter book, all_contents, url, filename, login
+def process_chapter book, all_contents, url, filename, login, opts
   contents = nil
   if login.nil?
     contents = open(url)
@@ -45,10 +45,22 @@ def process_chapter book, all_contents, url, filename, login
   xhtmlWrapper = File.open("template.xhtml").read
 
   f = Tempfile.new filename
-
-  doc.css('h2').each do |headline|
-    #force page break before sections
-    headline.before '<div style="page-break-before:always;"></div>'
+  
+  headlines = {
+    "h1" => :h1break,
+    "h2" => :h2break,
+    "h3" => :h3break,
+    "h4" => :h4break,
+  }
+  headlines.each do |tag, option|
+    if opts[option] != "none"
+      parts = opts[option].split ' '
+      mode = parts.length > 1 ? parts[1] : "before"
+      setting = parts.length > 0 ? parts[0] : "auto"
+      doc.css(tag).each do |headline|
+        headline.before "<div style='page-break-#{mode}:#{setting};'></div>"
+      end
+    end
   end
 
   doc.css('script').each do |script|
@@ -125,6 +137,10 @@ args = ArgsParser.parse ARGV do
   arg :author, 'Author', :alias => :a
   arg :contents, 'Contents File', :default => 'contents.json'
   arg :stylesheet, "Optional stylesheet"
+  arg :h1break, "Page break settings for h1 tags", :default => "right"
+  arg :h2break, "Page break settings for h2 tags", :default => "avoid after"
+  arg :h3break, "Page break settings for h3 tags", :default => "none"
+  arg :h4break, "Page break settings for h4 tags", :default => "none"
 end
 
 if args.has_option? :help
@@ -164,7 +180,7 @@ book.add_creator(args[:author]) if args.has_param?(:author)
 
 chapters = []
 contents.each do |content|
-  chapters << process_chapter(book, contents, content["url"], content["file"], content["login"])
+  chapters << process_chapter(book, contents, content["url"], content["file"], content["login"], args)
 end
 
 book.ordered {
