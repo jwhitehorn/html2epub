@@ -46,15 +46,12 @@ def process_chapter book, all_contents, url, filename, login, opts
 
   f = Tempfile.new filename
   
-  headlines = {
-    "h1" => :h1break,
-    "h2" => :h2break,
-    "h3" => :h3break,
-    "h4" => :h4break,
-  }
-  headlines.each do |tag, option|
-    if opts[option] != "none"
-      parts = opts[option].split ' '
+  headlines = ["h1", "h2", "h3", "h4"]
+  
+  headlines.each do |tag|
+    break_opt = "#{tag}break".to_sym
+    if opts[break_opt] != "none"
+      parts = opts[break_opt].split ' '
       mode = parts.length > 1 ? parts[1] : "before"
       setting = parts.length > 0 ? parts[0] : "auto"
       doc.css(tag).each do |headline|
